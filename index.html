@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Emeklilik Yönetim Sistemi</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <img class="wave" src="img/wave.png" />
+    <div class="container">
+      <div class="img">
+        <img src="img/bg.svg" />
+      </div>
+      <div class="login-content">
+        <form action="index.html" id="loginForm">
+          <img
+            src="img/logo belediye.png"
+            style="height: 80px; width: 230px; margin-bottom: 30px"
+          />
+          <h3
+            class="title"
+            style="font-size: 20px; margin-bottom: 30px; color: #3b3b79"
+          >
+            Emeklilik Yönetim Sistemi
+          </h3>
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="div">
+              <h5>TC Kimlik Numarası</h5>
+              <input
+                type="number"
+                class="input"
+                maxlength="11"
+                oninput="checkMaxLength(this) "
+                autofocus
+              />
+            </div>
+          </div>
+          <div class="input-div pass">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="div">
+              <h5 id="verificationQuestion">Doğrulama Kodu</h5>
+              <input
+                type="number"
+                class="input"
+                maxlength="6"
+                oninput="checkMaxLength(this)"
+                id="verificationCodeInput"
+              />
+            </div>
+          </div>
+          <p style="margin-top: 20px">
+            <i style="margin-right: 5px; font-size: 1.4em">&#8593;</i> İşlemin
+            Sonucunu Girin
+            <i style="margin-left: 5px; font-size: 1.2em">&#8593;</i>
+          </p>
+
+          <input type="submit" class="btn" value="Giriş Yap" id="loginButton" />
+        </form>
+        <div
+          id="profileCard"
+          style="display: none; border: 3px solid #38d39f; border-radius: 25px"
+        >
+          <img
+            src="img/logo belediye.png"
+            style="height: 58px; margin-bottom: 16px"
+          />
+          <table>
+            <tr>
+              <td>TC Kimlik No</td>
+              <td>12345678910</td>
+            </tr>
+            <tr>
+              <td>Ad Soyad</td>
+              <td>Enes Arslan</td>
+            </tr>
+            <tr>
+              <td>Birim</td>
+              <td>Bilgi İşlem</td>
+            </tr>
+            <tr>
+              <td>Ünvan</td>
+              <td>Bilgisayar Mühendisi</td>
+            </tr>
+
+            <tr>
+              <td>Emeklilik Tarihi</td>
+              <td>13.08.2023</td>
+            </tr>
+          </table>
+          <p class="details">
+            Sorgulamada adı geçen Enes Arslan <span> 13.08.2023 </span>tarihinde
+            Malatya Büyükşehir Belediyesinde 657 sayılı DMK tabi Memur
+            kadrosunda emekli olmuştur.
+          </p>
+          <button class="sorgu" id="sorgu">Başka Sorgu</button>
+        </div>
+      </div>
+      <footer>
+        <p>
+          <a href="img/KVKK-Aydınlatma-Metni.pdf" target="_blank"
+            >KVKK Aydınlatma</a
+          >
+          Metni Kep Adresi : malatyabb@hs01.kep.tr, malatyabb@hs03.kep.tr
+        </p>
+        <div class="social-media-icons">
+          <!-- Add your social media icons here -->
+          <a
+            href="https://www.facebook.com/MalatyaBelTr"
+            target="_blank"
+            class="icon"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a
+            href="https://twitter.com/MalatyaBelTr"
+            target="_blank"
+            class="icon"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/malatyabeltr/"
+            target="_blank"
+            class="icon"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/user/malatyabeltr"
+            target="_blank"
+            class="icon"
+            ><i class="fab fa-youtube"></i
+          ></a>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="js/main.js"></script>
+
+    <script>
+      function updateVerificationQuestion() {
+        let randomNumber1, randomNumber2, operator, result, question;
+
+        do {
+          randomNumber1 = Math.floor(Math.random() * 10);
+          randomNumber2 = Math.floor(Math.random() * 10);
+          operator = Math.floor(Math.random() * 3); // 0: Toplama, 1: Çıkarma, 2: Çarpma
+
+          switch (operator) {
+            case 0:
+              result = randomNumber1 + randomNumber2;
+              question = `${randomNumber1} + ${randomNumber2} = ?`;
+              break;
+            case 1:
+              result = randomNumber1 - randomNumber2;
+              question = `${randomNumber1} - ${randomNumber2} = ?`;
+              break;
+            case 2:
+              result = randomNumber1 * randomNumber2;
+              question = `${randomNumber1} * ${randomNumber2} = ?`;
+              break;
+          }
+        } while (result <= 0);
+
+        document.getElementById("verificationQuestion").textContent = question;
+        return result;
+      }
+
+      function checkVerificationCode(inputElement) {
+        const result = updateVerificationQuestion();
+
+        if (parseInt(inputElement.value) === result) {
+          // Kod doğruysa burada gerekli işlemleri yapabilirsiniz.
+          alert("Doğrulama kodu doğru!");
+        }
+      }
+
+      // Sayfa yüklendiğinde doğrulama kodunu otomatik olarak güncelle
+      window.addEventListener("load", updateVerificationQuestion);
+
+      // Eski Yapı
+      // function generateRandomNumber() {
+      //   return Math.floor(Math.random() * 10); // 0 ile 9 arasında rastgele bir sayı üret
+      // }
+
+      // function generateVerificationCode() {
+      //   var number1 = generateRandomNumber();
+      //   var number2 = generateRandomNumber();
+      //   var sum = number1 + number2;
+
+      //   var verificationCodeElement =
+      //     document.getElementById("verificationCode");
+      //   verificationCodeElement.textContent =
+      //     number1 + " + " + number2 + " = ?";
+      // }
+
+      // Sayfa yüklendiğinde doğrulama kodunu otomatik olarak oluştur
+      // window.onload = generateVerificationCode;
+
+      // JavaScript ile giriş yap butonuna tıklandığında profil kartını gösterme
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById("loginForm").style.display = "none";
+          document.getElementById("profileCard").style.display = "block";
+        });
+      document.getElementById("sorgu").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("profileCard").style.display = "none";
+      });
+      function checkMaxLength(input) {
+        const maxLength = parseInt(input.getAttribute("maxlength"));
+        if (input.value.length > maxLength) {
+          input.value = input.value.slice(0, maxLength);
+        }
+      }
+    </script>
+  </body>
+</html>
