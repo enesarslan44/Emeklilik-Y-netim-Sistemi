@@ -48,27 +48,6 @@
             class="g-recaptcha"
             data-sitekey="6LfQPrYoAAAAACeESplOWf2v5WX1V4J4zMGMeobO"
           ></div>
-          <div class="input-div pass">
-            <div class="i">
-              <i class="fas fa-lock"></i>
-            </div>
-            <div class="div">
-              <h5 id="verificationQuestion">Doğrulama Kodu</h5>
-              <input
-                type="number"
-                class="input"
-                maxlength="6"
-                oninput="checkMaxLength(this)"
-                id="verificationCodeInput"
-              />
-            </div>
-          </div>
-
-          <p style="margin-top: 20px">
-            <i style="margin-right: 5px; font-size: 1.4em">&#8593;</i> İşlemin
-            Sonucunu Girin
-            <i style="margin-left: 5px; font-size: 1.2em">&#8593;</i>
-          </p>
 
           <input type="submit" class="btn" value="Giriş Yap" id="loginButton" />
         </form>
@@ -151,68 +130,6 @@
     <script type="text/javascript" src="js/main.js"></script>
 
     <script>
-      function onSubmit(token) {
-        document.getElementById("demo-form").submit();
-      }
-      function updateVerificationQuestion() {
-        let randomNumber1, randomNumber2, operator, result, question;
-
-        do {
-          randomNumber1 = Math.floor(Math.random() * 10);
-          randomNumber2 = Math.floor(Math.random() * 10);
-          operator = Math.floor(Math.random() * 3); // 0: Toplama, 1: Çıkarma, 2: Çarpma
-
-          switch (operator) {
-            case 0:
-              result = randomNumber1 + randomNumber2;
-              question = `${randomNumber1} + ${randomNumber2} = ?`;
-              break;
-            case 1:
-              result = randomNumber1 - randomNumber2;
-              question = `${randomNumber1} - ${randomNumber2} = ?`;
-              break;
-            case 2:
-              result = randomNumber1 * randomNumber2;
-              question = `${randomNumber1} * ${randomNumber2} = ?`;
-              break;
-          }
-        } while (result <= 0);
-
-        document.getElementById("verificationQuestion").textContent = question;
-        return result;
-      }
-
-      function checkVerificationCode(inputElement) {
-        const result = updateVerificationQuestion();
-
-        if (parseInt(inputElement.value) === result) {
-          // Kod doğruysa burada gerekli işlemleri yapabilirsiniz.
-          alert("Doğrulama kodu doğru!");
-        }
-      }
-
-      // Sayfa yüklendiğinde doğrulama kodunu otomatik olarak güncelle
-      window.addEventListener("load", updateVerificationQuestion);
-
-      // Eski Yapı
-      // function generateRandomNumber() {
-      //   return Math.floor(Math.random() * 10); // 0 ile 9 arasında rastgele bir sayı üret
-      // }
-
-      // function generateVerificationCode() {
-      //   var number1 = generateRandomNumber();
-      //   var number2 = generateRandomNumber();
-      //   var sum = number1 + number2;
-
-      //   var verificationCodeElement =
-      //     document.getElementById("verificationCode");
-      //   verificationCodeElement.textContent =
-      //     number1 + " + " + number2 + " = ?";
-      // }
-
-      // Sayfa yüklendiğinde doğrulama kodunu otomatik olarak oluştur
-      // window.onload = generateVerificationCode;
-
       // JavaScript ile giriş yap butonuna tıklandığında profil kartını gösterme
       document
         .getElementById("loginButton")
