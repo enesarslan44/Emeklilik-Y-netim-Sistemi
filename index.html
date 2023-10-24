@@ -18,7 +18,7 @@
         <img src="img/bg.svg" />
       </div>
       <div class="login-content">
-        <form action="index.html" id="loginForm">
+        <form method="POST" id="loginForm">
           <img
             src="img/logo belediye.png"
             style="height: 80px; width: 230px; margin-bottom: 30px"
@@ -41,9 +41,11 @@
                 maxlength="11"
                 oninput="checkMaxLength(this) "
                 autofocus
+                required
               />
             </div>
           </div>
+          <div id="g-recaptcha-error"></div>
           <div
             class="g-recaptcha"
             data-sitekey="6LfQPrYoAAAAACeESplOWf2v5WX1V4J4zMGMeobO"
@@ -131,13 +133,13 @@
 
     <script>
       // JavaScript ile giriş yap butonuna tıklandığında profil kartını gösterme
-      document
-        .getElementById("loginButton")
-        .addEventListener("click", function (e) {
-          e.preventDefault();
-          document.getElementById("loginForm").style.display = "none";
-          document.getElementById("profileCard").style.display = "block";
-        });
+      // document
+      //   .getElementById("loginButton")
+      //   .addEventListener("click", function (e) {
+      //     e.preventDefault();
+      //     document.getElementById("loginForm").style.display = "none";
+      //     document.getElementById("profileCard").style.display = "block";
+      //   });
       document.getElementById("sorgu").addEventListener("click", function (e) {
         e.preventDefault();
         document.getElementById("loginForm").style.display = "block";
@@ -149,6 +151,19 @@
           input.value = input.value.slice(0, maxLength);
         }
       }
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          var captchares = grecaptcha.getResponse();
+          if (captchares.length == 0) {
+            alert("Doğrulama Yapın Lütfen");
+            //or return false;
+          } else {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("profileCard").style.display = "block";
+          }
+        });
     </script>
   </body>
 </html>
